@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Perch | JPII Student Editorial & Newsletter</title>
+    <style>
+        /* Modern Substack-Inspired Editorial Design */
+        :root {
+            --bg-color: #fdfdfc;
+            --text-main: #191919;
+            --text-muted: #666666;
+            --accent-navy: #1a252f;
+            --accent-gold: #c5a059;
+            --accent-gold-light: #f9f6f0;
+            --border-color: #e5e5e0;
+            --font-serif: "Georgia", Times, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Notification Bar / Mini Header */
+        .top-bar {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: var(--accent-navy);
+            color: #ffffff;
+            text-align: center;
+            padding: 8px 10px;
+            font-weight: 600;
+        }
+
+        /* Main Editorial Header */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 2.5rem 1rem 1rem 1rem;
+            background: #ffffff;
+        }
+
+        .header-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--accent-navy);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-title:hover {
+            color: var(--accent-gold);
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* Substack-style Clean Navbar */
+        nav {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .subscribe-btn-sm {
+            font-family: var(--font-sans);
+            background: var(--accent-navy);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .subscribe-btn-sm:hover {
+            background: var(--accent-gold);
+        }
+
+        /* Container Grid Layout */
+        .main-layout {
+            max-width: 1140px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 850px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .logo-title { font-size: 2.5rem; }
+            nav .nav-container { flex-direction: column; gap: 15px; text-align: center; }
+        }
+
+        /* Substack Call-to-Action Callout */
+        .substack-hero-cta {
+            grid-column: 1 / -1;
+            background: var(--accent-gold-light);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .substack-hero-cta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-navy);
+        }
+
+        .substack-hero-cta p {
+            font-family: var(--font-sans);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1rem;
+        }
+
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            max-width: 450px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .cta-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .cta-submit {
+            background: var(--accent-navy);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .cta-submit:hover {
+            background: var(--accent-gold);
+        }
+
+        /* Article List Style (Substack Layout) */
+        .articles-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .feed-section-heading {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: -10px;
+            font-weight: 700;
+        }
+
+        .post-card {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .post-category {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .post-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            line-height: 1.3;
+        }
+
+        .post-title:hover {
+            color: #555;
+        }
+
+        .post-excerpt {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-meta {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: #888888;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .author-badge {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .sidebar-widget {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+        }
+
+        .widget-title {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-navy);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .leaderboard-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .leaderboard-num {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--border-color);
+            line-height: 1;
+        }
+
+        .leaderboard-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .leaderboard-content p {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            background: #ffffff;
+            padding: 3rem 1rem;
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Announcement banner -->
+    <div class="top-bar">The Independent Student Voice of Pope John Paul II High School</div>
+
+    <!-- Magazine Logo Block -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo-title">THE PERCH</a>
+            <p class="subtitle">Faith, Culture, Community, and Athletics</p>
+        </div>
+    </header>
+
+    <!-- Navigation Menu pinned dynamically -->
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#the-pew">The Pew</a></li>
+                <li><a href="#praeco">Praeco</a></li>
+                <li><a href="#off-campus">Off Campus</a></li>
+                <li><a href="#the-courtyard">The Courtyard</a></li>
+                <li><a href="#the-bleachers">The Bleachers</a></li>
+            </ul>
+            <a href="#subscribe" class="subscribe-btn-sm">Subscribe</a>
+        </div>
+    </nav>
+
+    <!-- Main Dynamic Content Engine Grid -->
+    <div class="main-layout">
+        
+        <!-- Big Hero Signup Prompt (Substack Native Feature Style) -->
+        <div id="subscribe" class="substack-hero-cta">
+            <h2>Read the latest from JPII's premier editorial</h2>
+            <p>Get investigative school reporting, deep cultural op-eds, parish updates, and direct coverage from the bleachers sent straight to your inbox.</p>
+            <form class="cta-form" onsubmit="alert('Thank you for subscribing! This form is set up for GitHub Pages or static host layouts.'); return false;">
+                <input type="email" class="cta-input" placeholder="Type your email..." required>
+                <button type="submit" class="cta-submit">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Left Feed Column: Holds Articles categorized by user spec -->
+        <main class="articles-feed">
+
+            <!-- THE PEW SECTION -->
+            <div id="the-pew" class="feed-section-heading">The Pew</div>
+            
+            <article class="post-card">
+                <span class="post-category">The Pew • Church &amp; Faith</span>
+                <h3 class="post-title">Sacred Architecture and the Modern Student: Finding Silence on Campus</h3>
+                <p class="post-excerpt">In the hustle of high school life, finding spaces of absolute contemplation is increasingly rare. This month, we explore how parish sanctuaries and quiet reflection blocks influence the day-to-day mental focus of JPII students.</p>
+                <div class="post-meta">
+                    <span class="author-badge">By Claire Henderson</span>
+                    <span>•</span>
+                    <span>Oct 12</span>
+                </div>
+            </article>
+
+            <!-- PRAECO SECTION -->
+            <div id="praeco" class="feed-section-heading">Praeco</div>
+
+            <article class="post-card">
+                <span class="post-category">Praeco • Monthly Op-Ed</span>
+                <h3 class="post-title">The Attention Economy is Winning, and Our Classrooms are the Front Line</h3>
+                <p class="post-excerpt">An analysis of modern smartphone policies, passive infinite scroll patterns, and why genuine classroom debate is facing its toughest opponent yet. Our monthly opinion breakdown tackles what it truly means to engage critically in 2026.</p>
+                <div class="post-meta">
+                    <span class="author-badge">By Matthew Albright</span>
+                    <span>•</span>
+                    <span>Oct 08</span>
+                </div>
+            </article>
+
+            <!-- OFF CAMPUS SECTION -->
+            <div id="off-campus" class="feed-section-heading">Off Campus</div>
+
+            <article class="post-card">
+                <span class="post-category">Off Campus • Student Exploits</span>
+                <h3 class="post-title">Behind the Scenes: JPII Volunteers Rebuild Community Centers Downtown</h3>
+                <p class="post-excerpt">A deep-dive look into how a group of twelve seniors spent their long weekend out in the local community, trading football tailgates for hammers, drywall saws, and city infrastructure revitalization projects.</p>
+                <div class="post-meta">
+                    <span class="author-badge">By Liam O'Connor</span>
+                    <span>•</span>
+                    <span>Sep 29</span>
+                </div>
+            </article>
+
+            <!-- THE COURTYARD SECTION -->
+            <div id="the-courtyard" class="feed-section-heading">The Courtyard</div>
+
+            <article class="post-card">
+                <span class="post-category">The Courtyard • Campus Culture</span>
+                <h3 class="post-title">From Hallway Trends to Coffee Lines: The Shift in Club Culture This Semester</h3>
+                <p class="post-excerpt">The campus layout is humming with new energy as dynamic club memberships spike. We take a look into the courtyard to review the highlights of the new intramural leagues and student interest clubs taking root.</p>
+                <div class="post-meta">
+                    <span class="author-badge">By Sophia Martinez</span>
+                    <span>•</span>
+                    <span>Sep 24</span>
+                </div>
+            </article>
+
+            <!-- THE BLEACHERS SECTION -->
+            <div id="the-bleachers" class="feed-section-heading">The Bleachers</div>
+
+            <article class="post-card">
+                <span class="post-category">The Bleachers • JPII Athletics</span>
+                <h3 class="post-title">Under the Lights: Defensive Strategy Secures the Season Opener Victory</h3>
+                <p class="post-excerpt">An inside look at the tactical changes made by the coaching staff during the fourth-quarter crunch. With key player interviews and breakdown stats straight from the sideline coaches.</p>
+                <div class="post-meta">
+                    <span class="author-badge">By Coach / Sports Desk</span>
+                    <span>•</span>
+                    <span>Sep 18</span>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- Right Side Panel Column: Information Widgets and Trending Lists -->
+        <aside class="sidebar">
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title">About The Perch</h3>
+                <p class="about-text">We are the premiere student-led journalistic publication at JPII. Focused on deep-dive community reporting, rigorous open-topic op-eds, and complete tracking of student performance on and off campus.</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Trending Pieces</h3>
+                <ul class="leaderboard-list">
+                    <li class="leaderboard-item">
+                        <span class="leaderboard-num">1</span>
+                        <div class="leaderboard-content">
+                            <h4>The Attention Economy is Winning, and Our Classrooms are the Front Line</h4>
+                            <p>Praeco • 5 min read</p>
+                        </div>
+                    </li>
+                    <li class="leaderboard-item">
+                        <span class="leaderboard-num">2</span>
+                        <div class="leaderboard-content">
+                            <h4>Under the Lights: Defensive Strategy Secures Victory</h4>
+                            <p>The Bleachers • 3 min read</p>
+                        </div>
+                    </li>
+                    <li class="leaderboard-item">
+                        <span class="leaderboard-num">3</span>
+                        <div class="leaderboard-content">
+                            <h4>Sacred Architecture and the Modern Student</h4>
+                            <p>The Pew • 7 min read</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- Universal Editorial Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#subscribe">Subscribe</a>
+            <a href="#">Contact Editorial Desk</a>
+        </div>
+        <p>&copy; 2026 The Perch — Pope John Paul II Student Editorial Board. Built for open publication.</p>
+    </footer>
+
+</body>
+</html>
